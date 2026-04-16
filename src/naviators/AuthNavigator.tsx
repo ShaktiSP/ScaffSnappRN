@@ -1,0 +1,36 @@
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SplashScreen from '../screen/SplashScreen';
+import ProfileSelectionScreen from '../screen/profileSelection/ProfileSelectionScreen';
+import OnboardingScreen from '../screen/onBoarding/OnBoardingScreen';
+import LogInScreen from '../screen/logIn/LogInScreen';
+
+const Stack = createNativeStackNavigator();
+
+export default function AuthNavigator({ initialRoute }: { initialRoute: string }) {
+  return (
+    <Stack.Navigator initialRouteName={initialRoute}>
+      <Stack.Screen
+        name="SplashScreen"
+        component={SplashScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="OnBoardingScreen"
+        component={OnboardingScreen}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="ProfileSelectionScreen"
+        component={ProfileSelectionScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="LogInScreen"
+        component={LogInScreen}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
