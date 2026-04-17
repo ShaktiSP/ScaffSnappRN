@@ -4,6 +4,8 @@ import SplashScreen from '../screen/SplashScreen';
 import ProfileSelectionScreen from '../screen/profileSelection/ProfileSelectionScreen';
 import OnboardingScreen from '../screen/onBoarding/OnBoardingScreen';
 import LogInScreen from '../screen/logIn/LogInScreen';
+import EmailVerification from '../screen/emailVerificcation/EmailVerification';
+import OtpVerification from '../screen/otpVerification/OtpVerification';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +31,16 @@ export default function AuthNavigator({ initialRoute }: { initialRoute: string }
       <Stack.Screen
         name="LogInScreen"
         component={LogInScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="EmailVerification"
+        component={EmailVerification}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="OtpVerification"
+        component={OtpVerification}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

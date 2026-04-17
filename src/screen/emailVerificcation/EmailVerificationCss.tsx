@@ -72,11 +72,6 @@ const styles = StyleSheet.create({
     color: '#333333',
   },
 
-  forgotPasswordBtn: {
-    alignSelf: 'flex-start',
-    marginTop: hp(1),
-  },
-  
   forgotPassword: {
     width: '100%',
     fontSize: fp(2),

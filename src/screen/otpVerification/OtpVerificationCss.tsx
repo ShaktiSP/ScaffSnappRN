@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     fontSize: fp(1.8),
     color: '#777',
     marginTop: hp(0.5),
+    textAlign: 'center',
   },
 
   cardSelected: {
@@ -72,18 +73,33 @@ const styles = StyleSheet.create({
     color: '#333333',
   },
 
-  forgotPasswordBtn: {
-    alignSelf: 'flex-start',
-    marginTop: hp(1),
-  },
-  
-  forgotPassword: {
+  otpContainer: {
     width: '100%',
-    fontSize: fp(2),
+    marginTop: hp(3),
+  },
+
+  otpBox: {
+    width: hp(8),
+    height: hp(8),
+    borderRadius: wp(3),
+    borderWidth: 1.5,
+    borderColor: '#ccc',
+    backgroundColor: '#fafafa',
+    margin: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  otpText: {
+    fontSize: fp(2.5),
     fontWeight: '600',
-    color: '#2F60F9',
-    top: hp(1.5),
-    justifyContent: 'flex-start'
+    color: '#000',
+    textAlign: 'center',
+  },
+
+  otpBoxFocused: {
+    borderColor: '#D66801',
+    backgroundColor: '#fff8f0',
   },
 
   button: {

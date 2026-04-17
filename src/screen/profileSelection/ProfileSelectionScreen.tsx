@@ -6,6 +6,8 @@ import {
   Text, 
   TouchableOpacity, 
   View,
+  StatusBar,
+  
 } from 'react-native';
 import AppLogo from '../../resources/assets/applogo.svg';
 import PmIcon from '../../resources/assets/pmIcon.svg';
@@ -18,18 +20,21 @@ const ProfileSelectionScreen = ({ navigation }: any) => {
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
 
   const handleRoleSelect = (role: string) => {
-
     setSelectedRole(prev => (prev === role ? null : role));
   };
 
   const handleGetStarted = () => {
     if (!selectedRole) return;
-
     navigation.navigate('LogInScreen', { role: selectedRole });
   };
   
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="#FDB001"
+        translucent={false}
+      />
       <LinearGradient
         colors={['#FDB001', '#D66801']}
         start={{ x: 0, y: 0 }}
