@@ -20,11 +20,7 @@ const OtpVerification = ({ navigation, route }: any) => {
 
   const isFormValid = otp.length === 4;
 
-  const handleOtpChange = text => {
-    if (text !== otp) {
-      setOtp(text);
-    }
-  };
+
 
   const handleSubmit = () => {
     if (!isFormValid) return;
