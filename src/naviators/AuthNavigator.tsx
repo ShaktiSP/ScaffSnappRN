@@ -6,6 +6,7 @@ import OnboardingScreen from '../screen/onBoarding/OnBoardingScreen';
 import LogInScreen from '../screen/logIn/LogInScreen';
 import EmailVerification from '../screen/emailVerificcation/EmailVerification';
 import OtpVerification from '../screen/otpVerification/OtpVerification';
+import SetNewPassword from '../screen/setNewPassword/SetNewPassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,11 @@ export default function AuthNavigator({ initialRoute }: { initialRoute: string }
       <Stack.Screen
         name="OtpVerification"
         component={OtpVerification}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SetNewPassword"
+        component={SetNewPassword}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

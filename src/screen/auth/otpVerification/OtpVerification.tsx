@@ -9,7 +9,7 @@ import {
   StatusBar,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { hp, wp } from '../../utils/Dimensions';
+import { hp, wp } from '../../../utils/Dimensions';
 import AppLogo from '../../resources/assets/applogo.svg';
 import BackIcon from '../../resources/assets/backIcon.svg';
 import { OtpInput } from 'react-native-otp-entry';
@@ -20,11 +20,9 @@ const OtpVerification = ({ navigation, route }: any) => {
 
   const isFormValid = otp.length === 4;
 
-
-
   const handleSubmit = () => {
     if (!isFormValid) return;
-    navigation?.navigate('NextScreen', { otp });
+    navigation?.navigate('SetNewPassword', { otp });
   };
 
   return (
@@ -66,8 +64,8 @@ const OtpVerification = ({ navigation, route }: any) => {
             placeholder="----"
             type="numeric"
             secureTextEntry={false}
-            onTextChange={text => console.log(text)}
-            onFilled={text => console.log(`OTP is ${text}`)}
+            onTextChange={text => setOtp(text)}
+            onFilled={text => setOtp(text)}
             textInputProps={{
               accessibilityLabel: 'One-Time Password',
             }}

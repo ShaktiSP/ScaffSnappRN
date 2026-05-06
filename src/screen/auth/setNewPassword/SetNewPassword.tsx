@@ -7,33 +7,35 @@ import { SafeAreaView,
     StatusBar
  } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { hp, wp } from "../../utils/Dimensions";
+import { hp, wp } from '../../../utils/Dimensions';
 import AppLogo from '../../resources/assets/applogo.svg';
 import BackIcon from '../../resources/assets/backIcon.svg';
-import styles from "./EmailVerificationCss";
+import styles from "./SetNewPasswordCss";
 
-const EmailVerification = ({ navigation, route }: any) => {
+const SetNewPassword = ({ navigation, route }: any) => {
 
-  const [emailvalue, setEmailValue] = useState('');
+  const [newPasswordValue, setnewPasswordValue] = useState('');
+  const [confirmPasswordValue, setConfirmPasswordValue] = useState('');
+
 
   const isFormValid =
-    emailvalue.trim() !== ''
+  newPasswordValue.trim() !== ''
 
   const handleGetStarted = () => {
     if (!isFormValid) {
       return;
     }
-    navigation?.replace('OtpVerification');
+    // navigation?.replace('OtpVerification');
   };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="#FDB001"
-        translucent={false}
-      />
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor="#FDB001"
+          translucent={false}
+        />
         <LinearGradient
           colors={['#FDB001', '#D66801']}
           start={{ x: 0, y: 0 }}
@@ -47,28 +49,35 @@ const EmailVerification = ({ navigation, route }: any) => {
             >
               <BackIcon width={wp(10)} height={hp(5)} />
             </TouchableOpacity>
-            <Text style={styles.headerTitle}>FOROGOT PASSWORD</Text>
+            <Text style={styles.headerTitle}>CHANGE PASSWORD</Text>
           </View>
         </LinearGradient>
 
         <View style={styles.whiteBG}>
           <AppLogo width={wp(40)} height={hp(20)} />
 
-          <Text style={styles.title}>Email Verification</Text>
+          <Text style={styles.title}>Set New Password</Text>
 
           <TextInput
             style={styles.input}
-            placeholder="Enter Registered Email"
-            value={emailvalue}
-            onChangeText={setEmailValue}
+            placeholder="New Password"
+            value={newPasswordValue}
+            onChangeText={setnewPasswordValue}
           />
-    
+
+          <TextInput
+            style={styles.input}
+            placeholder="Confirm Password"
+            value={confirmPasswordValue}
+            onChangeText={setConfirmPasswordValue}
+          />
+
           <TouchableOpacity
             style={[styles.button, { opacity: isFormValid ? 1 : 0.5 }]}
             onPress={handleGetStarted}
             disabled={!isFormValid}
           >
-            <Text style={styles.buttonText}>SUBMIT REQUEST</Text>
+            <Text style={styles.buttonText}>SUBMIT</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -76,4 +85,4 @@ const EmailVerification = ({ navigation, route }: any) => {
   );
 };
 
-export default EmailVerification;
+export default SetNewPassword;

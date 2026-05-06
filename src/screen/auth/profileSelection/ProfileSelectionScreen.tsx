@@ -13,7 +13,7 @@ import AppLogo from '../../resources/assets/applogo.svg';
 import PmIcon from '../../resources/assets/pmIcon.svg';
 import TradesmanIcon from '../../resources/assets/tradesmanIcon.svg';
 import CpIcon from '../../resources/assets/cpIcon.svg';
-import { wp, hp } from '../../utils/Dimensions';
+import { hp, wp } from '../../../utils/Dimensions';
 
 const ProfileSelectionScreen = ({ navigation }: any) => {
 
@@ -49,8 +49,8 @@ const ProfileSelectionScreen = ({ navigation }: any) => {
 
         <TouchableOpacity
           style={[
-            styles.card, 
-            selectedRole === 'PROJECT_MANAGER' && styles.cardSelected
+            styles.card,
+            selectedRole === 'PROJECT_MANAGER' && styles.cardSelected,
           ]}
           onPress={() => handleRoleSelect('PROJECT_MANAGER')}
           activeOpacity={0.8}
@@ -60,7 +60,7 @@ const ProfileSelectionScreen = ({ navigation }: any) => {
             <View style={styles.textContainer}>
               <Text style={styles.title}>Project Manager</Text>
               <Text style={styles.subtitle}>
-                Approve requests and manage scaffold{'\n'}projects
+                Approve requests and manage{'\n'}scaffold projects
               </Text>
             </View>
           </View>
@@ -68,8 +68,8 @@ const ProfileSelectionScreen = ({ navigation }: any) => {
 
         <TouchableOpacity
           style={[
-            styles.card, 
-            selectedRole === 'COMPETENT_PERSON' && styles.cardSelected
+            styles.card,
+            selectedRole === 'COMPETENT_PERSON' && styles.cardSelected,
           ]}
           onPress={() => handleRoleSelect('COMPETENT_PERSON')}
           activeOpacity={0.8}
@@ -87,8 +87,8 @@ const ProfileSelectionScreen = ({ navigation }: any) => {
 
         <TouchableOpacity
           style={[
-            styles.card, 
-            selectedRole === 'TRADESMAN' && styles.cardSelected
+            styles.card,
+            selectedRole === 'TRADESMAN' && styles.cardSelected,
           ]}
           onPress={() => handleRoleSelect('TRADESMAN')}
           activeOpacity={0.8}
@@ -98,24 +98,20 @@ const ProfileSelectionScreen = ({ navigation }: any) => {
             <View style={styles.textContainer}>
               <Text style={styles.title}>Tradesman</Text>
               <Text style={styles.subtitle}>
-                Request and view scaffold information
+                Request and view scaffold{'\n'}information
               </Text>
             </View>
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[
-            styles.button, 
-            !selectedRole && styles.buttonDisabled
-          ]}
+          style={[styles.button, !selectedRole && styles.buttonDisabled]}
           onPress={handleGetStarted}
           disabled={!selectedRole}
           activeOpacity={0.8}
         >
           <Text style={styles.buttonText}>CONTINUE</Text>
         </TouchableOpacity>
-
       </View>
     </SafeAreaView>
   );
