@@ -9,10 +9,10 @@ import {
   StatusBar,
   
 } from 'react-native';
-import AppLogo from '../../resources/assets/applogo.svg';
-import PmIcon from '../../resources/assets/pmIcon.svg';
-import TradesmanIcon from '../../resources/assets/tradesmanIcon.svg';
-import CpIcon from '../../resources/assets/cpIcon.svg';
+import AppLogo from '../../../resources/assets/applogo.svg';
+import PmIcon from '../../../resources/assets/pmIcon.svg';
+import TradesmanIcon from '../../../resources/assets/tradesmanIcon.svg';
+import CpIcon from '../../../resources/assets/cpIcon.svg';
 import { hp, wp } from '../../../utils/Dimensions';
 
 const ProfileSelectionScreen = ({ navigation }: any) => {

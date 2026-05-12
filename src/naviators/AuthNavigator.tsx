@@ -1,12 +1,12 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from '../screen/SplashScreen';
-import ProfileSelectionScreen from '../screen/profileSelection/ProfileSelectionScreen';
-import OnboardingScreen from '../screen/onBoarding/OnBoardingScreen';
-import LogInScreen from '../screen/logIn/LogInScreen';
-import EmailVerification from '../screen/emailVerificcation/EmailVerification';
-import OtpVerification from '../screen/otpVerification/OtpVerification';
-import SetNewPassword from '../screen/setNewPassword/SetNewPassword';
+import EmailVerification from '../screen/auth/emailVerificcation/EmailVerification';
+import LogInScreen from '../screen/auth/logIn/LogInScreen';
+import OnboardingScreen from '../screen/auth/onBoarding/OnBoardingScreen';
+import OtpVerification from '../screen/auth/otpVerification/OtpVerification';
+import ProfileSelectionScreen from '../screen/auth/profileSelection/ProfileSelectionScreen';
+import SetNewPassword from '../screen/auth/setNewPassword/SetNewPassword';
 
 const Stack = createNativeStackNavigator();
 

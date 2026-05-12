@@ -18,7 +18,7 @@ const OnboardingScreen = ({ navigation }: any) => {
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require('../../resources/assets/main.png')}
+        source={require('../../../resources/assets/main.png')}
         style={styles.background}
         resizeMode="cover"
       >

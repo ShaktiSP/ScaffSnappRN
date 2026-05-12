@@ -8,8 +8,8 @@ import { SafeAreaView,
  } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { hp, wp } from '../../../utils/Dimensions';
-import AppLogo from '../../resources/assets/applogo.svg';
-import BackIcon from '../../resources/assets/backIcon.svg';
+import AppLogo from '../../../resources/assets/applogo.svg';                 
+import BackIcon from '../../../resources/assets/backIcon.svg';
 import styles from "./EmailVerificationCss";
 
 const EmailVerification = ({ navigation, route }: any) => {

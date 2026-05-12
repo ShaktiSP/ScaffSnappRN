@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { wp, hp, fp } from "../../utils/Dimensions";
+import { wp, hp, fp } from "../..//../utils/Dimensions";
 
 const styles = StyleSheet.create({
   gradient: {
