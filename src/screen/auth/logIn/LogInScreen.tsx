@@ -13,10 +13,13 @@ import BackIcon from '../../../resources/assets/backIcon.svg';
 import styles from "./LogInScreenCss";
 import { hp, wp } from '../../../utils/Dimensions';
 
+
+
 const LogInScreen = ({ navigation, route }: any) => {
+
     
     const role = route?.params?.role;
-
+console.log(role)
     const roleMap: any = {
       PROJECT_MANAGER: 'Project Manager',
       COMPETENT_PERSON: 'Competent Person',
@@ -71,7 +74,6 @@ const LogInScreen = ({ navigation, route }: any) => {
           <Text style={styles.subtitle}>
             Enter your credentials to continue
           </Text>
-
           <TextInput
             style={styles.input}
             placeholder="Company ID"
@@ -83,6 +85,7 @@ const LogInScreen = ({ navigation, route }: any) => {
             style={styles.input}
             placeholder="Email"
             value={emailvalue}
+        
             onChangeText={setEmailValue}
           />
 
