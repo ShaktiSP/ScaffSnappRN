@@ -7,6 +7,7 @@ import OnboardingScreen from '../screen/auth/onBoarding/OnBoardingScreen';
 import OtpVerification from '../screen/auth/otpVerification/OtpVerification';
 import ProfileSelectionScreen from '../screen/auth/profileSelection/ProfileSelectionScreen';
 import SetNewPassword from '../screen/auth/setNewPassword/SetNewPassword';
+import HomePMScreem from '../screen/projectManager/home/HomePMScreem';
 
 const Stack = createNativeStackNavigator();
 
@@ -47,6 +48,11 @@ export default function AuthNavigator({ initialRoute }: { initialRoute: string }
       <Stack.Screen
         name="SetNewPassword"
         component={SetNewPassword}
+        options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        name="HomePMScreem"
+        component={HomePMScreem}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

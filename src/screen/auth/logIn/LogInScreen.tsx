@@ -39,7 +39,7 @@ console.log(role)
     if (!isFormValid) {
       return;
     }
-    navigation.navigate('EmailVerification');
+    navigation.navigate('HomePMScreem');
   };
 
   return (
