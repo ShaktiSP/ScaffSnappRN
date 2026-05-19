@@ -7,9 +7,11 @@ import {
   Image,
   Animated,
   Dimensions,
+  SafeAreaView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from "./HomePMScreeCSS";
+import OngoingScreen from '../home/OnGoingScreen';
 
 const { width } = Dimensions.get('window');
 
@@ -38,100 +40,119 @@ export default function HomePMScreem() {
     outputRange: [0, tabWidth, tabWidth * 2],
   });
 
-  return (
-    <View style={styles.container}>
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 0:
+        return <OngoingScreen />;
+      case 1:
+        return (
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Newly Added</Text>
+          </View>
+        );
+      case 2:
+        return (
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Completed</Text>
+          </View>
+        );
+      default:
+        return null;
+    }
+  };
 
-      {/* Header */}
-      <LinearGradient
-        colors={['#FDB001', '#D66801']}
-        top={{ x: 0, y: 0 }}
-        bottom={{ x: 1, y: 0 }}
-        style={styles.header}
-      >
-        <View style={styles.userInfo}>
-          <Image
-            source={{ uri: 'https://i.pravatar.cc/150?img=52' }}
-            style={styles.avatar}
-          />
-          <View style={styles.userText}>
-            <Text style={styles.userName}>John Carter</Text>
-            <Text style={styles.userRole}>Project Manager</Text>
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#F5F5F5' }}>
+      <View style={{ flex: 1 }}>
+        <LinearGradient
+          colors={['#FDB001', '#D66801']}
+          start={{ x: 0, y: 0 }}  
+          end={{ x: 1, y: 0 }}    
+          style={styles.header}
+        >
+          <View style={styles.userInfo}>
+            <Image
+              source={{ uri: 'https://i.pravatar.cc/150?img=52' }}
+              style={styles.avatar}
+            />
+            <View style={styles.userText}>
+              <Text style={styles.userName}>John Carter</Text>
+              <Text style={styles.userRole}>Project Manager</Text>
+            </View>
+          </View>
+
+          <View style={styles.headerActions}>
+            <TouchableOpacity style={styles.iconBtn} activeOpacity={0.7}>
+              <View style={styles.bellWrapper}>
+                <Text style={styles.iconText}>🔔</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.scanBtn} activeOpacity={0.7}>
+              <Text style={styles.scanIcon}>⊞</Text>
+            </TouchableOpacity>
+          </View>
+        </LinearGradient>
+
+        <View style={styles.searchContainer}>
+          <View style={styles.searchBox}>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Search by ID, Location"
+              placeholderTextColor="#aaa"
+              value={searchText}
+              onChangeText={(text: string) => setSearchText(text)}
+            />
+            <TouchableOpacity activeOpacity={0.7}>
+              <Text style={styles.searchIcon}>🔍</Text>
+            </TouchableOpacity>
           </View>
         </View>
-
-        <View style={styles.headerActions}>
-          <TouchableOpacity style={styles.iconBtn} activeOpacity={0.7}>
-            <View style={styles.bellWrapper}>
-              <Text style={styles.iconText}>🔔</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.scanBtn} activeOpacity={0.7}>
-            <Text style={styles.scanIcon}>⊞</Text>
-          </TouchableOpacity>
+        <View style={styles.tabsContainer}>
+          <View style={styles.tabsRow}>
+            {TABS.map((tab: string, index: number) => {
+              const isActive: boolean = activeTab === index;
+              return (
+                <TouchableOpacity
+                  key={tab}
+                  style={styles.tab}
+                  onPress={() => handleTabPress(index)}
+                  activeOpacity={0.7}
+                >
+                  <View style={styles.tabLabelRow}>
+                    <Text
+                      style={[
+                        styles.tabLabel,
+                        isActive ? styles.tabLabelActive : styles.tabLabelInactive,
+                      ]}
+                    >
+                      {tab}
+                    </Text>
+                    {tab === 'Newly Added' && (
+                      <View style={styles.dot} />
+                    )}
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+          <View style={styles.indicatorTrack}>
+            <Animated.View
+              style={[
+                styles.indicator,
+                {
+                  width: tabWidth,
+                  left: indicatorLeft,
+                },
+              ]}
+            />
+          </View>
         </View>
-      </LinearGradient>
-
-      {/* Search Bar */}
-      <View style={styles.searchContainer}>
-        <View style={styles.searchBox}>
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search by ID, Location"
-            placeholderTextColor="#aaa"
-            value={searchText}
-            onChangeText={(text: string) => setSearchText(text)}
-          />
-          <TouchableOpacity activeOpacity={0.7}>
-            <Text style={styles.searchIcon}>🔍</Text>
-          </TouchableOpacity>
+        <View style={{ flex: 1 }}>
+          {renderTabContent()}
         </View>
+
       </View>
-
-      {/* Tabs */}
-      <View style={styles.tabsContainer}>
-        <View style={styles.tabsRow}>
-          {TABS.map((tab: string, index: number) => {
-            const isActive: boolean = activeTab === index;
-            return (
-              <TouchableOpacity
-                key={tab}
-                style={styles.tab}
-                onPress={() => handleTabPress(index)}
-                activeOpacity={0.7}
-              >
-                <View style={styles.tabLabelRow}>
-                  <Text
-                    style={[
-                      styles.tabLabel,
-                      isActive ? styles.tabLabelActive : styles.tabLabelInactive,
-                    ]}
-                  >
-                    {tab}
-                  </Text>
-                  {tab === 'Newly Added' && (
-                    <View style={styles.dot} />
-                  )}
-                </View>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-
-        {/* Animated underline indicator */}
-        <View style={styles.indicatorTrack}>
-          <Animated.View
-            style={[
-              styles.indicator,
-              {
-                width: tabWidth,
-                left: indicatorLeft,
-              },
-            ]}
-          />
-        </View>
-      </View>
-
-    </View>
+    </SafeAreaView>
   );
 }
