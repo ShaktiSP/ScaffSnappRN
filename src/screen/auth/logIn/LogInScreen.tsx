@@ -12,14 +12,16 @@ import AppLogo from '../../../resources/assets/applogo.svg';
 import BackIcon from '../../../resources/assets/backIcon.svg';
 import styles from "./LogInScreenCss";
 import { hp, wp } from '../../../utils/Dimensions';
-
+import { useAppDispatch } from '../../../redux/hooks';
+import { loginSuccess } from '../../../redux/authSlice';
 
 
 const LogInScreen = ({ navigation, route }: any) => {
 
-    
-    const role = route?.params?.role;
-console.log(role)
+  const dispatch = useAppDispatch();
+  const role = route?.params?.role;
+
+    console.log(role);
     const roleMap: any = {
       PROJECT_MANAGER: 'Project Manager',
       COMPETENT_PERSON: 'Competent Person',
@@ -39,7 +41,7 @@ console.log(role)
     if (!isFormValid) {
       return;
     }
-    navigation.navigate('HomePMScreem');
+   dispatch(loginSuccess(role));
   };
 
   return (
@@ -85,7 +87,6 @@ console.log(role)
             style={styles.input}
             placeholder="Email"
             value={emailvalue}
-        
             onChangeText={setEmailValue}
           />
 

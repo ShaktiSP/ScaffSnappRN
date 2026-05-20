@@ -12,6 +12,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import styles from "./HomePMScreeCSS";
 import OngoingScreen from '../home/OnGoingScreen';
+import NewlyAddedScreen from '../NewlyAddedAcreen';
 
 const { width } = Dimensions.get('window');
 
@@ -46,9 +47,7 @@ export default function HomePMScreem() {
         return <OngoingScreen />;
       case 1:
         return (
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Newly Added</Text>
-          </View>
+         <NewlyAddedScreen/>
         );
       case 2:
         return (

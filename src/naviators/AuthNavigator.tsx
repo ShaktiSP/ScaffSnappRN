@@ -8,6 +8,7 @@ import OtpVerification from '../screen/auth/otpVerification/OtpVerification';
 import ProfileSelectionScreen from '../screen/auth/profileSelection/ProfileSelectionScreen';
 import SetNewPassword from '../screen/auth/setNewPassword/SetNewPassword';
 import HomePMScreem from '../screen/projectManager/home/HomePMScreem';
+import HomeCPScreen from '../screen/competentPerson/home/HomeCPScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,7 +25,6 @@ export default function AuthNavigator({ initialRoute }: { initialRoute: string }
         component={OnboardingScreen}
         options={{ headerShown: false }}
       />
-
       <Stack.Screen
         name="ProfileSelectionScreen"
         component={ProfileSelectionScreen}
@@ -50,11 +50,7 @@ export default function AuthNavigator({ initialRoute }: { initialRoute: string }
         component={SetNewPassword}
         options={{ headerShown: false }}
       />
-       <Stack.Screen
-        name="HomePMScreem"
-        component={HomePMScreem}
-        options={{ headerShown: false }}
-      />
+     
     </Stack.Navigator>
   );
 }
