@@ -5,7 +5,6 @@ import AuthNavigator from './AuthNavigator';
 import AppNavigator from './AppNavigator';
 import { useAppSelector } from '../redux/hooks';
 
-
 export default function RootNavigator() {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 

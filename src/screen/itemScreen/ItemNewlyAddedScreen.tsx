@@ -29,4 +29,4 @@ const ItemNewlyAddedScreen = ({
   );
 };
 
-export default ItemNewlyAddedScreen; // ← this was missing
+export default ItemNewlyAddedScreen;
