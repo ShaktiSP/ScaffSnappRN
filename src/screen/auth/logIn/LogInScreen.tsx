@@ -1,47 +1,72 @@
 import React, { useState } from 'react';
-import { SafeAreaView, 
-    Text, TextInput, 
-    View, Keyboard, 
-    TouchableWithoutFeedback,
-    TouchableOpacity,
-    StatusBar
- } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
+import {
+  SafeAreaView,
+  Text, TextInput,
+  View, Keyboard,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+  StatusBar,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
+
+import LinearGradient from 'react-native-linear-gradient';
 
 import AppLogo from '../../../resources/assets/applogo.svg';
 import BackIcon from '../../../resources/assets/backIcon.svg';
-import styles from "./LogInScreenCss";
+import styles from './LogInScreenCss';
 import { hp, wp } from '../../../utils/Dimensions';
 import { useAppDispatch } from '../../../redux/hooks';
 import { loginSuccess } from '../../../redux/authSlice';
-
+import loginServices from '../../loginServices';
 
 const LogInScreen = ({ navigation, route }: any) => {
-
   const dispatch = useAppDispatch();
   const role = route?.params?.role;
 
-    console.log(role);
-    const roleMap: any = {
-      PROJECT_MANAGER: 'Project Manager',
-      COMPETENT_PERSON: 'Competent Person',
-      TRADESMAN: 'Tradesman',
-    };
+  const roleMap: any = {
+    PROJECT_MANAGER: 'Project Manager',
+    COMPETENT_PERSON: 'Competent Person',
+    TRADESMAN: 'Tradesman',
+  };
 
-  const [companyIdvalue, setCompanyIdValue] = useState('');
-  const [emailvalue, setEmailValue] = useState('');
-  const [passwordvalue, setPasswordValue] = useState('');
+  const [companyIdValue, setCompanyIdValue] = useState('');
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const isFormValid =
-    companyIdvalue.trim() !== '' &&
-    emailvalue.trim() !== '' &&
-    passwordvalue.trim() !== '';
+    companyIdValue.trim() !== '' &&
+    emailValue.trim() !== '' &&
+    passwordValue.trim() !== '';
 
-  const handleGetStarted = () => {
-    if (!isFormValid) {
-      return;
+  const handleGetStarted = async () => {
+    if (!isFormValid) return;
+
+    // Only hit API for TRADESMAN, dispatch directly for PM and CP
+    if (role === 'TRADESMAN') {
+      try {
+        setLoading(true);
+        await loginServices.login({
+          PJT: companyIdValue.trim(),
+          email: emailValue.trim(),
+          employerName: 'anju',        // send if required by your backend
+          password: passwordValue.trim(),
+          user_type: role,
+        });
+        dispatch(loginSuccess(role));
+      } catch (error: any) {
+        Alert.alert(
+          'Login Failed',
+          error?.message || 'Something went wrong. Please try again.'
+        );
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      // PM and CP — no API call, dispatch directly
+      dispatch(loginSuccess(role));
     }
-   dispatch(loginSuccess(role));
   };
 
   return (
@@ -73,27 +98,26 @@ const LogInScreen = ({ navigation, route }: any) => {
           <AppLogo width={wp(40)} height={hp(20)} />
 
           <Text style={styles.title}>Login as a {roleMap[role] || 'User'}</Text>
-          <Text style={styles.subtitle}>
-            Enter your credentials to continue
-          </Text>
+          <Text style={styles.subtitle}>Enter your credentials to continue</Text>
+
           <TextInput
             style={styles.input}
             placeholder="Company ID"
-            value={companyIdvalue}
+            value={companyIdValue}
             onChangeText={setCompanyIdValue}
           />
-
           <TextInput
             style={styles.input}
             placeholder="Email"
-            value={emailvalue}
+            value={emailValue}
             onChangeText={setEmailValue}
+            keyboardType="email-address"
+            autoCapitalize="none"
           />
-
           <TextInput
             style={styles.input}
             placeholder="Password"
-            value={passwordvalue}
+            value={passwordValue}
             onChangeText={setPasswordValue}
             secureTextEntry
           />
@@ -106,11 +130,15 @@ const LogInScreen = ({ navigation, route }: any) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.button, { opacity: isFormValid ? 1 : 0.5 }]}
+            style={[styles.button, { opacity: isFormValid && !loading ? 1 : 0.5 }]}
             onPress={handleGetStarted}
-            disabled={!isFormValid}
+            disabled={!isFormValid || loading}
           >
-            <Text style={styles.buttonText}>SUBMIT</Text>
+            {loading ? (
+              <ActivityIndicator color="#fff" />
+            ) : (
+              <Text style={styles.buttonText}>SUBMIT</Text>
+            )}
           </TouchableOpacity>
         </View>
       </SafeAreaView>

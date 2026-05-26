@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   FlatList,
   StyleSheet,
+  StatusBar,
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
@@ -41,12 +42,15 @@ interface OngoingItem {
   
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: '#F5F5F5' }}>
-  
-        {/* Header + Search — fixed height, does NOT grow */}
+        <StatusBar
+          translucent={false}
+          backgroundColor="#FDB001"
+          barStyle="light-content"
+        />
         <LinearGradient
           colors={['#FDB001', '#D66801']}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
+          top={{ x: 0, y: 0 }}
+          bottom={{ x: 1, y: 0 }}
           style={styles.header}
         >
           <View style={styles.userInfo}>
@@ -59,7 +63,7 @@ interface OngoingItem {
               <Text style={styles.userRole}>Project Manager</Text>
             </View>
           </View>
-  
+
           <View style={styles.headerActions}>
             <TouchableOpacity style={styles.iconBtn} activeOpacity={0.7}>
               <View style={styles.bellWrapper}>
@@ -71,7 +75,7 @@ interface OngoingItem {
             </TouchableOpacity>
           </View>
         </LinearGradient>
-  
+
         <View style={styles.searchContainer}>
           <View style={styles.searchBox}>
             <TextInput
@@ -86,11 +90,11 @@ interface OngoingItem {
             </TouchableOpacity>
           </View>
         </View>
-  
+
         {/* FlatList takes all remaining space */}
         <FlatList
           data={ongoingData}
-          keyExtractor={(item) => item.id}
+          keyExtractor={item => item.id}
           renderItem={renderItem}
           numColumns={2}
           columnWrapperStyle={style.columnWrapper}
@@ -98,7 +102,6 @@ interface OngoingItem {
           showsVerticalScrollIndicator={false}
           style={style.list}
         />
-  
       </SafeAreaView>
     );
   }

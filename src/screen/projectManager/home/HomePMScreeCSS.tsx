@@ -5,17 +5,19 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
   },
+
   header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: wp(4.2),
-    paddingTop: hp(6),
+    paddingTop: hp(3),
     paddingBottom: hp(2.5),
     borderBottomEndRadius: wp(5),
     borderBottomStartRadius: wp(5),
     overflow: "hidden",
   },
+
   userInfo: {
     flexDirection: "row",
     alignItems: "center",
@@ -28,25 +30,30 @@ const styles = StyleSheet.create({
     borderWidth: wp(0.5),
     borderColor: "rgba(255,255,255,0.6)",
   },
+
   userText: {
     gap: hp(0.25),
   },
+
   userName: {
     color: "#fff",
     fontSize: fp(2),
     fontWeight: "700",
     letterSpacing: 0.3,
   },
+
   userRole: {
     color: "rgba(255,255,255,0.85)",
     fontSize: fp(1.5),
     fontWeight: "400",
   },
+
   headerActions: {
     flexDirection: "row",
     alignItems: "center",
     gap: wp(2.6),
   },
+
   iconBtn: {
     width: wp(9.5),
     height: wp(9.5),
@@ -55,13 +62,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   bellWrapper: {
     alignItems: "center",
     justifyContent: "center",
   },
+
   iconText: {
     fontSize: fp(2.1),
   },
+
   scanBtn: {
     width: wp(10.5),
     height: wp(10.5),
@@ -74,6 +84,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
   },
+
   scanIcon: {
     fontSize: fp(2.3),
     color: "#FDB001",
@@ -84,6 +95,7 @@ const styles = StyleSheet.create({
     paddingVertical: hp(1.75),
     backgroundColor: "#fff",
   },
+
   searchBox: {
     flexDirection: "row",
     alignItems: "center",
@@ -98,6 +110,7 @@ const styles = StyleSheet.create({
     color: "#333",
     padding: 0,
   },
+  
   searchIcon: {
     fontSize: fp(2.1),
     marginLeft: wp(2.1),

@@ -8,6 +8,7 @@ import {
   Animated,
   Dimensions,
   SafeAreaView,
+  StatusBar,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from "./HomePMScreeCSS";
@@ -62,6 +63,11 @@ export default function HomePMScreem() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#F5F5F5' }}>
+       <StatusBar
+        translucent={false}
+        backgroundColor="#FDB001"
+        barStyle="light-content"
+      />
       <View style={{ flex: 1 }}>
         <LinearGradient
           colors={['#FDB001', '#D66801']}
