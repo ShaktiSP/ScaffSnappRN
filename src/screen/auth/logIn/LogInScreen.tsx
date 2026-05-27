@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import {
   SafeAreaView,
-  Text, TextInput,
-  View, Keyboard,
+  Text,
+  TextInput,
+  View,
+  Keyboard,
   TouchableWithoutFeedback,
   TouchableOpacity,
   StatusBar,
   Alert,
   ActivityIndicator,
+  ScrollView,       
+  KeyboardAvoidingView,  
+  Platform,          
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
@@ -31,26 +36,27 @@ const LogInScreen = ({ navigation, route }: any) => {
   };
 
   const [companyIdValue, setCompanyIdValue] = useState('');
+  const [employerValue, setEmployerValue] = useState(''); 
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [loading, setLoading] = useState(false);
 
   const isFormValid =
     companyIdValue.trim() !== '' &&
+    employerValue.trim() !== '' &&  
     emailValue.trim() !== '' &&
     passwordValue.trim() !== '';
 
   const handleGetStarted = async () => {
     if (!isFormValid) return;
 
-    // Only hit API for TRADESMAN, dispatch directly for PM and CP
     if (role === 'TRADESMAN') {
       try {
         setLoading(true);
         await loginServices.login({
           PJT: companyIdValue.trim(),
           email: emailValue.trim(),
-          employerName: 'anju',        // send if required by your backend
+          employerName: employerValue.trim(),  
           password: passwordValue.trim(),
           user_type: role,
         });
@@ -64,7 +70,6 @@ const LogInScreen = ({ navigation, route }: any) => {
         setLoading(false);
       }
     } else {
-      // PM and CP — no API call, dispatch directly
       dispatch(loginSuccess(role));
     }
   };
@@ -77,6 +82,7 @@ const LogInScreen = ({ navigation, route }: any) => {
           backgroundColor="#FDB001"
           translucent={false}
         />
+
         <LinearGradient
           colors={['#FDB001', '#D66801']}
           start={{ x: 0, y: 0 }}
@@ -94,53 +100,82 @@ const LogInScreen = ({ navigation, route }: any) => {
           </View>
         </LinearGradient>
 
-        <View style={styles.whiteBG}>
-          <AppLogo width={wp(40)} height={hp(20)} />
-
-          <Text style={styles.title}>Login as a {roleMap[role] || 'User'}</Text>
-          <Text style={styles.subtitle}>Enter your credentials to continue</Text>
-
-          <TextInput
-            style={styles.input}
-            placeholder="Company ID"
-            value={companyIdValue}
-            onChangeText={setCompanyIdValue}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            value={emailValue}
-            onChangeText={setEmailValue}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            value={passwordValue}
-            onChangeText={setPasswordValue}
-            secureTextEntry
-          />
-
-          <TouchableOpacity
-            style={styles.forgotPasswordBtn}
-            onPress={() => navigation.navigate('EmailVerification')}
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
+          <ScrollView
+            contentContainerStyle={{ flexGrow: 1 }}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
           >
-            <Text style={styles.forgotPassword}>Forgot Password?</Text>
-          </TouchableOpacity>
+            <View style={styles.whiteBG}>
+              <AppLogo width={wp(40)} height={hp(20)} />
 
-          <TouchableOpacity
-            style={[styles.button, { opacity: isFormValid && !loading ? 1 : 0.5 }]}
-            onPress={handleGetStarted}
-            disabled={!isFormValid || loading}
-          >
-            {loading ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <Text style={styles.buttonText}>SUBMIT</Text>
-            )}
-          </TouchableOpacity>
-        </View>
+              <Text style={styles.title}>
+                Login as a {roleMap[role] || 'User'}
+              </Text>
+              <Text style={styles.subtitle}>
+                Enter your credentials to continue
+              </Text>
+
+              <TextInput
+                style={styles.input}
+                placeholder="Company ID"
+                value={companyIdValue}
+                onChangeText={setCompanyIdValue}
+              />
+
+              {role === 'TRADESMAN' && (
+                <TextInput
+                  style={styles.input}
+                  placeholder="Employer"
+                  value={employerValue}
+                  onChangeText={setEmployerValue}
+                />
+              )}
+
+              <TextInput
+                style={styles.input}
+                placeholder="Email"
+                value={emailValue}
+                onChangeText={setEmailValue}
+                keyboardType="email-address"
+                autoCapitalize="none"
+              />
+
+              <TextInput
+                style={styles.input}
+                placeholder="Password"
+                value={passwordValue}
+                onChangeText={setPasswordValue}
+                secureTextEntry
+              />
+
+              <TouchableOpacity
+                style={styles.forgotPasswordBtn}
+                onPress={() => navigation.navigate('EmailVerification')}
+              >
+                <Text style={styles.forgotPassword}>Forgot Password?</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  { opacity: isFormValid && !loading ? 1 : 0.5 },
+                ]}
+                onPress={handleGetStarted}
+                disabled={!isFormValid || loading}
+              >
+                {loading ? (
+                  <ActivityIndicator color="#fff" />
+                ) : (
+                  <Text style={styles.buttonText}>SUBMIT</Text>
+                )}
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );

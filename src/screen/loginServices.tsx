@@ -17,10 +17,8 @@ class LoginService {
 
             const data = response.data;
 
-            // Cache user info
             await AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(data));
 
-            // Store token if returned
             if (data.token) {
                 await AsyncStorage.setItem('auth_token', data.token);
             }
