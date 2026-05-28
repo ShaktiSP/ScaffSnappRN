@@ -8,13 +8,14 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './onBoardingCss';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const OnboardingScreen = ({ navigation }: any) => {
 
-  const handleGetStarted = () => {
+  const handleGetStarted = async () => {
+    await AsyncStorage.setItem('hasSeenOnboarding', 'true');
     navigation?.navigate('ProfileSelectionScreen');
   };
-
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground

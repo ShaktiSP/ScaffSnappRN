@@ -5,3 +5,10 @@ export interface LoginRequestDto {
     password: string;
     user_type: string;
   }
+
+  export interface LoginRequestPMCPDto {
+    companyId: string;
+    email: string;
+    password: string;
+    user_type: string;
+  }

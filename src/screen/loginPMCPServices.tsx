@@ -1,17 +1,17 @@
 import apiClient from '../api/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { LoginDto, } from './login/loginDto';
-import { LoginRequestDto } from './login/loginRewuestDto';
+import { LoginDto, LoginResponsePMCPDto, } from './login/loginDto';
 import { API_ENDPOINTS } from '../api/endpoints';
+import { LoginRequestPMCPDto } from './login/loginRewuestDto';
 
 const AUTH_USER_KEY = 'auth_user';
 const TOKEN_KEY = 'auth_token';
 
-class LoginService {
-    async login(payload: LoginRequestDto): Promise<LoginDto> {
+class LoginPMCPServices {
+    async loginPMCP(payload: LoginRequestPMCPDto): Promise<LoginResponsePMCPDto> {
         try {
-            const response = await apiClient.post<LoginDto>(
-                API_ENDPOINTS.AUTH.LOGIN,
+            const response = await apiClient.post<LoginResponsePMCPDto>(
+                API_ENDPOINTS.PM_CP_AUTH.PMCPLOGIN,
                 payload
             );
 
@@ -44,4 +44,4 @@ class LoginService {
     }
 }
 
-export default new LoginService();
+export default new LoginPMCPServices();

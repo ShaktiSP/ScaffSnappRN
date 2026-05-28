@@ -4,7 +4,9 @@ export const API_ENDPOINTS = {
     },
     AUTH: {
         LOGIN: 'tradesMan/login',
-        REFRESH_TOKEN: 'users/refresh-token',
+    },
+    PM_CP_AUTH:{
+        PMCPLOGIN: 'projectManager/login'
     },
     UPDATE_DEVIDE_TOKEN:{
         DEVICE_TOKEN:'device/updateDevice'

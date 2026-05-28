@@ -1,35 +1,22 @@
 
-import axios, {
+import axios, {AxiosInstance,AxiosRequestConfig,AxiosResponse, AxiosError,InternalAxiosRequestConfig,} from 'axios';
+    
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_ENDPOINTS } from './endpoints';
 
-        AxiosInstance,
+const BASE_URL = 'https://api.scaffsnapp.com/api/v1/';
     
-        AxiosRequestConfig,
+const TIMEOUT =  30_000;
     
-        AxiosResponse,
+const TOKEN_KEY = 'auth_token';
     
-        AxiosError,
+const REFRESH_TOKEN_KEY = 'refresh_token';
     
-        InternalAxiosRequestConfig,
+const USER_KEY = 'auth_user';
     
-    } from 'axios';
-    
-    import AsyncStorage from '@react-native-async-storage/async-storage';
-    
-    import { API_ENDPOINTS } from './endpoints';
-    
-    const BASE_URL = 'https://api.scaffsnapp.com/api/v1/';
-    
-    const TIMEOUT =  30_000;
-    
-    const TOKEN_KEY = 'auth_token';
-    
-    const REFRESH_TOKEN_KEY = 'refresh_token';
-    
-    const USER_KEY = 'auth_user';
-    
-    // ─── Error Messages ───────────────────────────────────────────────────────────
-    
-    const ERROR_MESSAGES = {
+// ─── Error Messages ───────────────────────────────────────────────────────────
+
+const ERROR_MESSAGES = {
     
         NETWORK_ERROR: 'Network error. Please check your internet connection.',
     
@@ -82,9 +69,7 @@ import axios, {
                 this.handleRequest,
                 this.handleRequestError,
     );
-    
-     
-    
+
             this.instance.interceptors.response.use(
     
                 this.handleResponse,
@@ -94,8 +79,6 @@ import axios, {
             );
     
         }
-    
-     
     
         /**
     
@@ -185,7 +168,7 @@ import axios, {
     
          */
     
-        private handleResponseError = async (error: AxiosError): Promise<never> => {
+        private handleResponseError = async (error: AxiosError): Promise<any> => {
     
             const status = error.response?.status;
     
@@ -195,7 +178,7 @@ import axios, {
     
             // If 401 error and not already retrying
     
-            if (status === 401 && !originalRequest._retry && originalRequest.url !== API_ENDPOINTS.AUTH.LOGIN && originalRequest.url !== API_ENDPOINTS.AUTH.REFRESH_TOKEN) {
+            if (status === 401 && !originalRequest._retry && originalRequest.url !== API_ENDPOINTS.AUTH.LOGIN) {
     
                 originalRequest._retry = true;
     
@@ -263,7 +246,7 @@ import axios, {
     
                     // Refresh failed - logout user
     
-                    await AsyncStorage.multiRemove([TOKEN_KEY, REFRESH_TOKEN_KEY, USER_KEY]);
+                    await AsyncStorage.removeMany([TOKEN_KEY, REFRESH_TOKEN_KEY, USER_KEY]);
     
                     // You might want to trigger a redirect here via a global event or store action
     
