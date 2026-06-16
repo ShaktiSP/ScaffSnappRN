@@ -7,7 +7,7 @@ import { useAppDispatch } from '../redux/hooks';
 import { hydrateAuth } from '../redux/authSlice';
 import DeviceInfo from 'react-native-device-info';
 import UpdateDeviceServices from './UpdateDeviceServices';
-import AwsService from '../screen/itemservices';
+import AwsService from '../services/AwsService';
 
 const SplashScreen = ({ navigation }: any) => {
   const dispatch = useAppDispatch();

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  SafeAreaView,
   Text,
   TextInput,
   View,
@@ -16,16 +15,16 @@ import {
 
 import Toast from 'react-native-toast-message';
 import LinearGradient from 'react-native-linear-gradient';
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 import AppLogo from '../../../resources/assets/applogo.svg';
 import BackIcon from '../../../resources/assets/backIcon.svg';
 import styles from './LogInScreenCss';
 import { hp, wp } from '../../../utils/Dimensions';
 import { useAppDispatch } from '../../../redux/hooks';
 import { loginSuccess } from '../../../redux/authSlice';
-import loginServices from '../../loginServices';
-import loginPMCPServices from '../../loginPMCPServices';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import loginPMCPServices from '../../../services/loginPMCPServices';
+import loginServices from '../../../services/loginServices';
 
 const isValidEmail = (email: string) =>
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);

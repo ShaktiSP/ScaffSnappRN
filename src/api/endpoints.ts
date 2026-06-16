@@ -10,5 +10,8 @@ export const API_ENDPOINTS = {
     },
     UPDATE_DEVIDE_TOKEN:{
         DEVICE_TOKEN:'device/updateDevice'
-    }
+    },
+    COMPETENT_PERSON: {
+        PROJECT_LIST: 'competentPerson/getCompetentProjectList',
+      },
 };

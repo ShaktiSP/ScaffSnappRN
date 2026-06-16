@@ -1,8 +1,8 @@
 import apiClient from '../api/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_ENDPOINTS } from '../api/endpoints';
-import { UpdateDeviceRequest } from './updateDevice/UpdateDeviceRequest';
-import { UpdateDeviceTypeResponse } from './updateDevice/UpdateDeviceResponse';
+import { UpdateDeviceRequest } from './dto/updateDevice/UpdateDeviceRequest';
+import { UpdateDeviceTypeResponse } from './dto/updateDevice/UpdateDeviceResponse';
 
 class UpdateDeviceServices {
     async updateDevice(payload: UpdateDeviceRequest): Promise<UpdateDeviceTypeResponse> {

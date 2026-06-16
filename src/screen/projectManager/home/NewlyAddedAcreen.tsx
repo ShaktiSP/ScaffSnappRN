@@ -6,7 +6,7 @@ import {
   Dimensions,
   PixelRatio,
 } from 'react-native';
-import ItemNewlyAddedScreen from '../itemScreen/ItemNewlyAddedScreen';
+import ItemNewlyAddedScreen from '../../itemScreen/ItemNewlyAddedScreen';
 
 const { width: SW, height: SH } = Dimensions.get('window');
 const scale = SW / 375;

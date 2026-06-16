@@ -13,7 +13,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import styles from "./HomePMScreeCSS";
 import OngoingScreen from '../home/OnGoingScreen';
-import NewlyAddedScreen from '../NewlyAddedAcreen';
+import NewlyAddedScreen from './NewlyAddedAcreen';
 
 const { width } = Dimensions.get('window');
 

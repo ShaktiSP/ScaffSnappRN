@@ -1,6 +1,6 @@
 import apiClient from '../api/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { IAwsCredentials, IAwsCredentialsResponse } from './dto';
+import { IAwsCredentials, IAwsCredentialsResponse } from '../screen/dto/dto';
 
 const AWS_CREDENTIALS_KEY = 'aws_credentials';
 
