@@ -13,6 +13,8 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import styles from '../../projectManager/home/HomePMScreeCSS';
 import ItemOnGoingScreen from '../../itemScreen/ItemOnGoingScreen';
@@ -20,7 +22,20 @@ import ItemOnGoingScreen from '../../itemScreen/ItemOnGoingScreen';
 import { ProjectDto } from '../../dto/competentPersonHomeList/ProjectManagerDto';
 import cpHomeProjectService from '../../../services/cpHomeProjectService';
 
+// ---- Add cpMyProjectScreen (and its expected params) to your navigator's param list ----
+// Update this to match your actual RootStackParamList / navigator types
+type RootStackParamList = {
+  cpMyProjectScreen: { uuid: string };
+};
+
+type HomeCPNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'cpMyProjectScreen'
+>;
+
 export default function HomeCPScreen() {
+  const navigation = useNavigation<HomeCPNavigationProp>();
+
   const [searchText, setSearchText] = useState('');
   const [projects, setProjects] = useState<ProjectDto[]>([]);
 
@@ -105,10 +120,8 @@ export default function HomeCPScreen() {
       title={item.projectName}
       subtitle={`${item.totalRequests} Requests`}
       onPress={() => {
-        console.log(
-          'PROJECT UUID =>',
-          item.uuid,
-        );
+        // Navigate to the project detail screen, passing the project's uuid
+        navigation.navigate('cpMyProjectScreen', { uuid: item.uuid });
       }}
     />
   );
@@ -128,8 +141,8 @@ export default function HomeCPScreen() {
 
       <LinearGradient
         colors={['#FDB001', '#D66801']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
+        top={{ x: 0, y: 0 }}
+        bottom={{ x: 1, y: 0 }}
         style={styles.header}
       >
         <View style={styles.userInfo}>

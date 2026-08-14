@@ -13,5 +13,9 @@ export const API_ENDPOINTS = {
     },
     COMPETENT_PERSON: {
         PROJECT_LIST: 'competentPerson/getCompetentProjectList',
-      },
+    },
+
+    CP_PROJECT_DETAILS: {
+        PROJECT_DETAIL: 'scaffHold/getNewProjectScaffHold',
+    },
 };

@@ -11,7 +11,7 @@ class UpdateDeviceServices {
                 API_ENDPOINTS.UPDATE_DEVIDE_TOKEN.DEVICE_TOKEN,
                 payload
             );
-
+console.log(response,"response")
             const data = response.data;
 
             return data;

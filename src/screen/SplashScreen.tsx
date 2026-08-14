@@ -24,7 +24,8 @@ const SplashScreen = ({ navigation }: any) => {
   const updateDeviceToken = async () => {
     try {
       const params = await getDeviceParams();
-      await UpdateDeviceServices.updateDevice(params);
+      console.log(params,"ddhghdhgdh")
+      await UpdateDeviceServices.updateDevice(params); //
     } catch (error) {
       console.error('Device update failed:', error);
     }
